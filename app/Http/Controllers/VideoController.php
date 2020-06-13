@@ -24,7 +24,7 @@ class VideoController extends Controller
 
     public function videoView($id)
     {
-        $comments = Comment::where('video_id', $id)->get();
+        $comments = Comment::where('video_id', $id)->with('user')->get();
         $video = Video::where('id', $id)->first();
         return view('videoView', ['video' => $video, 'comments' => $comments] );
     }

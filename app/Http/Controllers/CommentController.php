@@ -8,8 +8,5 @@ use Auth;
 
 class CommentController extends Controller
 {
-    public function show($id){
-        $comments = Comment::where('video_id', $id)->get();
-        return ['comments' => $comments];
-    }
+
 }
