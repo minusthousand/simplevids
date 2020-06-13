@@ -54,8 +54,29 @@ class DatabaseSeeder extends Seeder
         $video->desc = 'Beautiful waves during the sunset.';
         $video->am_of_likes = '10';
         $video->ltd_ratio = '1';
-
         $video->save();
+
+        $comment = new Comment();
+        $user = User::where('name', 'Mihails Tumasevics')->first();
+        $comment->User()->associate($user);
+        $video = User::where('id', '1')->first();
+        $comment->Video()->associate($video);
+        $comment->text = 'Wow, this video is relaxing🤩';
+        $comment->save();
+        $comment = new Comment();
+        $user = User::where('name', 'Mihails Tumasevics')->first();
+        $comment->User()->associate($user);
+        $video = User::where('id', '1')->first();
+        $comment->Video()->associate($video);
+        $comment->text = 'Super!';
+        $comment->save();
+        $comment = new Comment();
+        $user = User::where('name', 'Mihails Tumasevics')->first();
+        $comment->User()->associate($user);
+        $video = User::where('id', '1')->first();
+        $comment->Video()->associate($video);
+        $comment->text = 'Showed my grandma, she said its ok';
+        $comment->save();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

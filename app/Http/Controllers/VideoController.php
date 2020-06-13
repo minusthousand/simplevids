@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Video;
 use Illuminate\Support\Facades\Storage;
+use App\Comment;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -23,8 +24,9 @@ class VideoController extends Controller
 
     public function videoView($id)
     {
+        $comments = Comment::where('video_id', $id)->get();
         $video = Video::where('id', $id)->first();
-        return view('videoView', ['video' => $video] );
+        return view('videoView', ['video' => $video, 'comments' => $comments] );
     }
 
     public function video($id){
@@ -57,6 +59,7 @@ class VideoController extends Controller
     }
 
     public function store(Request $request){
+
         $user = auth()->user();
         $request->validate([
             'name' => 'required:max:255',
