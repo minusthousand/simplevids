@@ -40,33 +40,33 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ url('/home') }}">{{ __('messages.Home') }}</a>
                         </li>
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('messages.Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                                 </li>
                             @endif
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="/{{Auth::user()->id}}/likedvideos">{{ __('Liked Videos') }}</a>
+                            <a class="nav-link" href="/{{Auth::user()->id}}/likedvideos">{{ __('messages.Liked_Videos') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/{{Auth::user()->id}}/myplaylists">{{ __('My Playlists') }}</a>
+                            <a class="nav-link" href="/{{Auth::user()->id}}/myplaylists">{{ __('messages.My_Playlists') }}</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('My Videos') }}</a>
 
                             <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item bg-dark text-white " href="/{{Auth::user()->id}}/myvideos">
-                                    {{ __('View') }}
+                                    {{ __('messages.View') }}
                                 </a>
                                 <a class="dropdown-item bg-dark text-white " href="/upload">
-                                    {{ __('Upload') }}
+                                    {{ __('messages.Upload') }}
                                 </a>
 
                         </li>
@@ -79,7 +79,7 @@
                                     <a class="dropdown-item bg-dark text-white " href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('messages.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -88,6 +88,21 @@
                                 </div>
                             </li>
                         @endguest
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ __("messages.Language") }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item bg-dark text-white " href="/lang/lv">
+                                    {{ __('lv') }}
+                                </a>
+
+                                <a class="dropdown-item bg-dark text-white " href="/lang/en">
+                                    {{ __('en') }}
+                                </a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

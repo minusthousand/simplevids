@@ -74,14 +74,14 @@ $(document).ready(function () {
             checkStatus(likedId);
             if ($("#like").attr('class') == 'btn btn-light btn-sm'){
                 $.post("/video/"+{{$video->id}}+"/likes", {val: 1, _token: CSRF_TOKEN }, function(){
-                    $("#likes").html('Likes: ');
+                    $("#likes").html('{{__("messages.Likes: ")}}');
                     $("#likes").append(getLikes());
 
                 })
             }
             else if ($("#like").attr('class') == 'btn btn-success btn-sm'){
                 $.post("/video/"+{{$video->id}}+"/likes", {val: 0, _token: CSRF_TOKEN }, function(){
-                    $("#likes").html('Likes: ');
+                    $("#likes").html('{{__("messages.Likes: ")}}');
                     $("#likes").append(getLikes());
                 })
             }
@@ -104,37 +104,37 @@ $(document).ready(function () {
             @guest
             @else
             <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle float-right text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('Options') }}</a>
+                <a class="nav-link dropdown-toggle float-right text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('messages.Options') }}</a>
             <div class="dropdown-menu dropdown-menu-right bg-dark">
             <a class="dropdown-item bg-dark text-white " href="addtoplaylist">
-                {{ __('Add to playlist') }}
+                {{ __('messages.Add_To_Playlist') }}
             </a>
             @if (Auth::user()->id == $video->users_id)
             <a class="dropdown-item bg-dark text-white " href="delete">
-                {{ __('Delete') }}
+                {{ __('messages.Delete') }}
             </a>
             @endif
             <a class="dropdown-item bg-dark text-white " href="report">
-                {{ __('Report') }}
+                {{ __('messages.Report') }}
             </a>
         </div>
     </div>
             @endguest
         <p>{{$video->desc}}</p>
-        <h6 id="likes">Likes: {{$video->am_of_likes}}</h6>
-        <button id="like" class="btn btn-light btn-sm">Like</button>
+        <h6 id="likes">{{__("messages.Likes: ")}}{{$video->am_of_likes}}</h6>
+        <button id="like" class="btn btn-light btn-sm">{{__("messages.Like")}}</button>
     </div>
 </div>
     <br><br>
-<h3>Comment section</h3>
+<h3>{{__("messages.Comment_Section")}}</h3>
 <p id="error" style="color: red"></p>
 <div class="row bootstrap snippets">
     <div class="col">
         <div class="comment-wrapper">
                 <div class="panel-body">
-                    <textarea id="text" class="form-control" placeholder="write a comment..." rows="2"></textarea>
+                <textarea id="text" class="form-control" placeholder="{{__("messages.Comment_Holder")}}" rows="2"></textarea>
                     <br>
-                    <button id="post" type="button" class="btn btn-info pull-right">Post</button>
+                    <button id="post" type="button" class="btn btn-info pull-right">{{__("messages.Post")}}</button>
                     <div class="clearfix"></div>
                     <hr>
                     <div id="comments" class="media-list">

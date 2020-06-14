@@ -11,7 +11,7 @@
         </a>
         <p>{{$video->video->desc}}</p>
         <br/>
-        <h6>Likes: {{$video->video->am_of_likes}}</h6>
+        <h6>{{__('messages.Likes: ')}} {{$video->video->am_of_likes}}</h6>
     </div>
 </div>
 <br/>

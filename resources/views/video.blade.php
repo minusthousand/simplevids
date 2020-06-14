@@ -10,7 +10,7 @@
         </a>
         <p>{{$video->desc}}</p>
         <br/>
-        <h6>Likes: {{$video->am_of_likes}}</h6>
+        <h6>{{__("messages.Likes: ")}} {{$video->am_of_likes}}</h6>
     </div>
 </div>
 <br/>

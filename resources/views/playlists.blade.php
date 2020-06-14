@@ -18,7 +18,11 @@
         <a href="/playlist/{{$playlist->id}}" style="text-decoration:none; color: white;">
         <h2 style="padding-left: 20px">{{$playlist->name}}</h2>
         </a>
-        <p></p>
+        @if ($playlist->name != 'Liked Videos')
+        <a href="/playlist/{{$playlist->id}}/delete" style="text-decoration:none; color: white; padding-left: 20px;">
+            <button type="button" class="btn btn-danger">{{__('messages.Delete')}}</button>
+            </a>
+            @endif
         <br/>
     </div>
 </div>

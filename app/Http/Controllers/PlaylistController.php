@@ -70,5 +70,13 @@ class PlaylistController extends Controller
         return redirect('/'.$user->id.'/myplaylists');
     }
 
-
+    public function delete($id){
+        $user = auth()->user();
+        if (Playlist::where('id', $id)->first()->name == "Liked Videos") {
+            return 'Cannot delete liked videos playlist.';
+        }
+        Playlist::where('id', $id)->delete();
+        return redirect('/'.$user->id.'/myplaylists');
 }
+    }
+

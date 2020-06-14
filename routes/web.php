@@ -59,6 +59,8 @@ Route::get('/playlist/{id?}', 'PlaylistVideoController@show');
 
 Route::post('/playlist/{id?}', 'PlaylistVideoController@add');
 
+Route::get('/playlist/{id?}/delete', 'PlaylistController@delete');
+
 Route::post('/playlist/{id?}/check', 'PlaylistVideoController@check');
 
 Route::post('/getId', 'PlaylistController@getId');
@@ -68,3 +70,5 @@ Route::post('/video/{id?}/likes', 'VideoController@like');
 Route::post('/video/{id?}/getlikes', 'VideoController@getlikes');
 
 Route::get('/{id?}/likedvideos', 'PlaylistVideoController@likedVideos');
+
+Route::get('lang/{locale}','LanguageController');

@@ -17,12 +17,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8" >
             <div class="card bg-dark">
-                <div class="card-header">Add to playlist</div>
+                <div class="card-header">{{__("messages.Add_To_Playlist")}}</div>
                 <div class="card-body">
                     <div class="row">
                         <a href="/newplaylist" style="text-decoration:none; color: white; margin: 20px;">
                             <h5 style="padding-left: 30px;">
-                                Create New Playlist
+                                {{__("messages.Create_New_Playlist")}}
                             </h5>
                 </a>
                     </div>
@@ -30,7 +30,7 @@
                 <div class="row">
                     <a id="{{$playlist->id}}" href="#" style="text-decoration:none; color: white; margin: 20px;">
                         <h5 style="padding-left: 30px;">
-                            Add to {{$playlist->name}}
+                            {{__("messages.Add_To")}} {{$playlist->name}}
                         </h5>
                     </a>
                 </div>
