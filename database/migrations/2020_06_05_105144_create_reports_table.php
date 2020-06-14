@@ -16,7 +16,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('video')->constrained();
+            $table->foreignId('video')->constrained()->onDelete('cascade');
             $table->string('reason', 255);
         });
     }

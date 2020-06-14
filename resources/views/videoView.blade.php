@@ -12,7 +12,7 @@ $(document).ready(function () {
             dataType: "html",
             async: false,
             success: function(data) { console.log("success"); },
-            error: function(ts) { alert(ts.responseText); },
+            error: function(ts) { console.log(ts.responseText); },
             complete: function(data) {console.log(data); }
         }).responseText;
         return id;
@@ -45,13 +45,6 @@ $(document).ready(function () {
 
     var likedId = getPlaylistId('Liked Videos');
     checkStatus(likedId);
-    var inState = 0;
-    if ($("#like").attr('class') == 'btn btn-light btn-sm'){
-        var inState = 0;
-    }
-    else if ($("#like").attr('class') == 'btn btn-success btn-sm'){
-        var inState = 1;
-    }
 
     $("#post").click(function () {
         if ('{{$user}}' == 'guest'){
@@ -73,6 +66,10 @@ $(document).ready(function () {
         }
     });
     $("#like").click(function () {
+        if ('{{$user}}' == 'guest'){
+            window.location.href = '/login';
+        }
+        else {
         $.post("/playlist/"+likedId, { id: {{$video->id}}, _token: CSRF_TOKEN }, function() {
             checkStatus(likedId);
             if ($("#like").attr('class') == 'btn btn-light btn-sm'){
@@ -89,6 +86,7 @@ $(document).ready(function () {
                 })
             }
         });
+    }
     });
 });
 </script>
@@ -103,6 +101,25 @@ $(document).ready(function () {
     <div class="col">
         <br/>
         <h2>{{$video->name}}</h2>
+            @guest
+            @else
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle float-right text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('Options') }}</a>
+            <div class="dropdown-menu dropdown-menu-right bg-dark">
+            <a class="dropdown-item bg-dark text-white " href="addtoplaylist">
+                {{ __('Add to playlist') }}
+            </a>
+            @if (Auth::user()->id == $video->users_id)
+            <a class="dropdown-item bg-dark text-white " href="delete">
+                {{ __('Delete') }}
+            </a>
+            @endif
+            <a class="dropdown-item bg-dark text-white " href="report">
+                {{ __('Report') }}
+            </a>
+        </div>
+    </div>
+            @endguest
         <p>{{$video->desc}}</p>
         <h6 id="likes">Likes: {{$video->am_of_likes}}</h6>
         <button id="like" class="btn btn-light btn-sm">Like</button>

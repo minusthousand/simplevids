@@ -40,8 +40,35 @@ class PlaylistController extends Controller
     }
 
     public function getId(Request $request){
-        $user = auth()->user();
+        $user = Auth::user();
         $id = Playlist::where('users_id', $user->id)->where('name', $request->name)->first()->id;
         return $id;
     }
+
+    public function selection($id){
+        $user = auth()->user();
+        $playlists = Playlist::where('users_id', $user->id)->get();
+        return view('selection', ['video_id' => $id, 'playlists' => $playlists]);
+    }
+
+    public function create(){
+        if (Auth::guest()) {
+            $reg = '/register';
+            return redirect($reg);
+        }
+        return view('newPlaylist');
+    }
+
+    public function store(Request $request){
+        $user = auth()->user();
+        $playlist = new Playlist();
+        $user = User::where('id', $user->id)->first();
+        $playlist->Users()->associate($user);
+        $playlist->name = $request->name;
+        $playlist->type = $request->type;
+        $playlist->save();
+        return redirect('/'.$user->id.'/myplaylists');
+    }
+
+
 }

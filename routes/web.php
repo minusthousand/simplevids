@@ -31,6 +31,16 @@ Route::get('/videos/{id?}/video', 'VideoController@video')->name('video');
 
 Route::get('/videos/{id?}/videoview', 'VideoController@videoView')->name('videoView');
 
+Route::get('/videos/{id?}/addtoplaylist', 'PlaylistController@selection');
+
+Route::get('/newplaylist', 'PlaylistController@create');
+
+Route::post('/newplaylist', 'PlaylistController@store')->name('storePlaylist');
+
+Route::get('/videos/{id?}/delete', 'VideoController@delete');
+
+Route::get('/videos/{id?}/report', 'ReportController@create');
+
 Route::get('/{id?}/myvideos', 'VideoController@myVideos')->name('myVideos');
 
 Route::get('/upload', 'VideoController@upload')->name('upload');
@@ -54,3 +64,5 @@ Route::post('/getId', 'PlaylistController@getId');
 Route::post('/video/{id?}/likes', 'VideoController@like');
 
 Route::post('/video/{id?}/getlikes', 'VideoController@getlikes');
+
+Route::get('/{id?}/likedvideos', 'PlaylistVideoController@likedVideos');

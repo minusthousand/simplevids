@@ -53,7 +53,7 @@
                             @endif
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}">{{ __('Liked Videos') }}</a>
+                            <a class="nav-link" href="/{{Auth::user()->id}}/likedvideos">{{ __('Liked Videos') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/{{Auth::user()->id}}/myplaylists">{{ __('My Playlists') }}</a>

@@ -96,4 +96,9 @@ class VideoController extends Controller
     public function getlikes($id){
         return $video = Video::where('id', $id)->first()->am_of_likes;
     }
+
+    public function delete($id){
+        Video::where('id', $id)->delete();
+        return redirect('/home');
+    }
 }
