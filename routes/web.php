@@ -34,3 +34,5 @@ Route::get('/{id?}/myvideos', 'VideoController@myVideos')->name('myVideos');
 Route::get('/upload', 'VideoController@upload')->name('upload');
 
 Route::post('/upload', 'VideoController@store')->name('storeVideo');
+
+Route::post('/video/{id?}/comment', 'CommentController@store')->name('storeComment');

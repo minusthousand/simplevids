@@ -24,10 +24,16 @@ class VideoController extends Controller
 
     public function videoView($id)
     {
-        $comments = Comment::where('video_id', $id)->with('user')->get();
+        if (Auth::guest()){
+            $user = 'guest';
+        }
+        else {
+            $user = Auth::user()->id;
+        }
+        $comments = Comment::where('video_id', $id)->with('user')->orderBy('created_at', 'desc')->get();
         $video = Video::where('id', $id)->first();
-        return view('videoView', ['video' => $video, 'comments' => $comments] );
-    }
+        return view('videoView', ['video' => $video, 'comments' => $comments, 'user' => $user] );
+}
 
     public function video($id){
         $filePath = $id.'/video.mp4';
