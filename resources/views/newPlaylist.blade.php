@@ -13,11 +13,6 @@
                             <label for="name" class="col-sm-4 col-form-label text-md-right">{{ __('Name') }}</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" required autofocus />
-                                @if ($errors->has('title'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
                         <div class="input-group-text bg-dark row" style="border:none;">

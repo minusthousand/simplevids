@@ -41,6 +41,8 @@ Route::get('/videos/{id?}/delete', 'VideoController@delete');
 
 Route::get('/videos/{id?}/report', 'ReportController@create');
 
+Route::post('/report', 'ReportController@store')->name('storeReport');
+
 Route::get('/{id?}/myvideos', 'VideoController@myVideos')->name('myVideos');
 
 Route::get('/upload', 'VideoController@upload')->name('upload');
