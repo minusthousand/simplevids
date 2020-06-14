@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         Video::truncate();
         Report::truncate();
         Comment::truncate();
-        Playlist::truncate();
         //Playlist_Video::truncate();
 
         $video = new Video();
@@ -77,6 +76,20 @@ class DatabaseSeeder extends Seeder
         $comment->Video()->associate($video);
         $comment->text = 'Showed my grandma, she said its ok';
         $comment->save();
+
+        $playlist = new Playlist();
+        $user = User::where('name', 'Mihails Tumasevics')->first();
+        $playlist->Users()->associate($user);
+        $playlist->name = "Cool playlist";
+        $playlist->type = '1';
+        $playlist->save();
+
+        $playlistVideo = new Playlist_Video();
+        $video = Video::where('id', '1')->first();
+        $playlist = Playlist::where('id', '1')->first();
+        $playlistVideo->Video()->associate($video);
+        $playlistVideo->Playlist()->associate($playlist);
+        $playlistVideo->save();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

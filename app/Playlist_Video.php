@@ -15,4 +15,7 @@ class Playlist_Video extends Model
     { // FK relationship
         return $this->belongsTo('App\Playlist');
     }
+
+
+    protected $table = 'playlist_videos';
 }

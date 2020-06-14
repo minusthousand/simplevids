@@ -56,7 +56,7 @@
                             <a class="nav-link" href="{{ url('/home') }}">{{ __('Liked Videos') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}">{{ __('My Playlists') }}</a>
+                            <a class="nav-link" href="/{{Auth::user()->id}}/myplaylists">{{ __('My Playlists') }}</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('My Videos') }}</a>

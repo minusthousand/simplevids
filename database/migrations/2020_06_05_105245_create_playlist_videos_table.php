@@ -16,8 +16,8 @@ class CreatePlaylistVideosTable extends Migration
         Schema::create('playlist_videos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('video')->constrained();
-            $table->foreignId('playlist')->constrained();
+            $table->foreignId('video_id')->constrained();
+            $table->foreignId('playlist_id')->constrained();
         });
     }
 

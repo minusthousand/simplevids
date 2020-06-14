@@ -3,6 +3,56 @@
 <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    function getPlaylistId($name){
+        id = jQuery.ajax({
+            type:"POST",
+            url:"/getId",
+            data: {name: $name, _token: CSRF_TOKEN },
+            dataType: "html",
+            async: false,
+            success: function(data) { console.log("success"); },
+            error: function(ts) { alert(ts.responseText); },
+            complete: function(data) {console.log(data); }
+        }).responseText;
+        return id;
+    }
+
+    function getLikes(){
+        var likes = jQuery.ajax({
+            type:"POST",
+            url:"/video/"+{{$video->id}}+"/getlikes",
+            data: { _token: CSRF_TOKEN },
+            dataType: "html",
+            async: false,
+            success: function(data) { console.log("success"); },
+            error: function(ts) { alert(ts.responseText); },
+            complete: function(data) {console.log(data); }
+        }).responseText;
+        return likes;
+    }
+
+    function checkStatus($id){
+        $.post("/playlist/"+$id+"/check", { id: {{$video->id}}, _token: CSRF_TOKEN }, function(data) {
+            if (data){
+                $("#like").attr('class', 'btn btn-light btn-sm');
+            }
+            else {
+                $("#like").attr('class', 'btn btn-success btn-sm');
+            }
+        });
+    }
+
+    var likedId = getPlaylistId('Liked Videos');
+    checkStatus(likedId);
+    var inState = 0;
+    if ($("#like").attr('class') == 'btn btn-light btn-sm'){
+        var inState = 0;
+    }
+    else if ($("#like").attr('class') == 'btn btn-success btn-sm'){
+        var inState = 1;
+    }
+
     $("#post").click(function () {
         if ('{{$user}}' == 'guest'){
             window.location.href = '/login';
@@ -15,14 +65,31 @@ $(document).ready(function () {
             $('#text').css("border","0");
             $('#error').html('');
             const user = {{($user)}};
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
              $.post("/video/{{$video->id}}/comment", { content: $('#text').val(), user: user, _token: CSRF_TOKEN }, function(data) {
                 var dt = new Date().toISOString().slice(0,19);
                 dt = dt.replace('T', ' ');
                 $('#comments').prepend('<div class="media"><div class="media-body"><span class="text-muted pull-right"><small class="text-muted">'+dt+'</small> </span><strong class="text-success">You</strong><p>'+$('#text').val()+'</p></div></div>')
         });
         }
-    })
+    });
+    $("#like").click(function () {
+        $.post("/playlist/"+likedId, { id: {{$video->id}}, _token: CSRF_TOKEN }, function() {
+            checkStatus(likedId);
+            if ($("#like").attr('class') == 'btn btn-light btn-sm'){
+                $.post("/video/"+{{$video->id}}+"/likes", {val: 1, _token: CSRF_TOKEN }, function(){
+                    $("#likes").html('Likes: ');
+                    $("#likes").append(getLikes());
+
+                })
+            }
+            else if ($("#like").attr('class') == 'btn btn-success btn-sm'){
+                $.post("/video/"+{{$video->id}}+"/likes", {val: 0, _token: CSRF_TOKEN }, function(){
+                    $("#likes").html('Likes: ');
+                    $("#likes").append(getLikes());
+                })
+            }
+        });
+    });
 });
 </script>
 <div class="container" margin="200px">
@@ -37,8 +104,8 @@ $(document).ready(function () {
         <br/>
         <h2>{{$video->name}}</h2>
         <p>{{$video->desc}}</p>
-        <h6>Likes: {{$video->am_of_likes}}</h6>
-        <button class="btn btn-light btn-sm">Like</button>
+        <h6 id="likes">Likes: {{$video->am_of_likes}}</h6>
+        <button id="like" class="btn btn-light btn-sm">Like</button>
     </div>
 </div>
     <br><br>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PlaylistVideoController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,3 +38,19 @@ Route::get('/upload', 'VideoController@upload')->name('upload');
 Route::post('/upload', 'VideoController@store')->name('storeVideo');
 
 Route::post('/video/{id?}/comment', 'CommentController@store')->name('storeComment');
+
+Route::get('/{id?}/myplaylists', 'PlaylistController@myPlaylists')->name('myPlaylists');
+
+Route::get('/createliked', 'PlaylistController@createLiked');
+
+Route::get('/playlist/{id?}', 'PlaylistVideoController@show');
+
+Route::post('/playlist/{id?}', 'PlaylistVideoController@add');
+
+Route::post('/playlist/{id?}/check', 'PlaylistVideoController@check');
+
+Route::post('/getId', 'PlaylistController@getId');
+
+Route::post('/video/{id?}/likes', 'VideoController@like');
+
+Route::post('/video/{id?}/getlikes', 'VideoController@getlikes');

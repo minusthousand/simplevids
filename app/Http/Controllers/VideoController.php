@@ -81,4 +81,19 @@ class VideoController extends Controller
                 return 'world!';
             }
     }
+
+    public function like($id, Request $request){
+        $video = Video::where('id', $id)->first();
+        if ($request->val == 1){
+            $video->increment('am_of_likes');
+        }
+        else {
+            $video->decrement('am_of_likes');
+        }
+
+    }
+
+    public function getlikes($id){
+        return $video = Video::where('id', $id)->first()->am_of_likes;
+    }
 }
