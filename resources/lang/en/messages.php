@@ -11,6 +11,7 @@ return [
     "Register" => "Register",
     "Liked_Videos" => "Liked Videos",
     "My_Playlists" => "My Playlists",
+    "My_Videos" => "My Videos",
     "View" => "View",
     "Upload" => "Upload",
     "Logout" => "Logout",

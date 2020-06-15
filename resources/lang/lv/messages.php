@@ -11,6 +11,7 @@ return [
     "Register" => "Reģistrēties",
     "Liked_Videos" => "Patikušie Video",
     "My_Playlists" => "Mani Playlisti",
+    "My_Videos" => "Mani Video",
     "View" => "Apskatīties",
     "Upload" => "Ielādēt",
     "Logout" => "Izlogoties",

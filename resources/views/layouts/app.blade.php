@@ -59,7 +59,7 @@
                             <a class="nav-link" href="/{{Auth::user()->id}}/myplaylists">{{ __('messages.My_Playlists') }}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('My Videos') }}</a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('messages.My_Videos') }}</a>
 
                             <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item bg-dark text-white " href="/{{Auth::user()->id}}/myvideos">
