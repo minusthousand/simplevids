@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Video;
 use Illuminate\Support\Facades\Storage;
 use App\Comment;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -19,7 +20,7 @@ class VideoController extends Controller
     public function preview($id)
     {
         $filePath = $id.'/preview.png';
-        return response()->file(storage_path('videos'.DIRECTORY_SEPARATOR.($filePath)));
+        return response()->file(storage_path('/app/public/videos'.DIRECTORY_SEPARATOR.($filePath)));
     }
 
     public function videoView($id)
@@ -37,7 +38,7 @@ class VideoController extends Controller
 
     public function video($id){
         $filePath = $id.'/video.mp4';
-        return response()->file(storage_path('videos'.DIRECTORY_SEPARATOR.($filePath)));
+        return response()->file(storage_path('/app/public/videos'.DIRECTORY_SEPARATOR.($filePath)));
     }
 
     public function myVideos($id){
@@ -65,21 +66,37 @@ class VideoController extends Controller
     }
 
     public function store(Request $request){
-
-        $user = auth()->user();
+        $user_id = auth()->user()->id;
         $request->validate([
             'name' => 'required:max:255',
             'desc' => 'required'
           ]);
-            $video = $request->file('video');
+
+          $video = new Video();
+          $user = User::where('id', $user_id)->first();
+          $video->Users()->associate($user);
+          $video->name = $request->name;
+          $video->type = $request->type;
+          $video->category = $request->category;
+          $video->desc = $request->desc;
+          $video->am_of_likes = '0';
+          $video->ltd_ratio = '0';
+          $video->save();
+            $video_file = $request->file('video');
             $preview = $request->file('preview');
 
-            if ($request->hasFile('video')){
-                return 'hello';
-            }
-            else {
-                return 'world!';
-            }
+            Storage::disk('local')->putFileAs(
+                '/public/videos/'.$video->id,
+                $video_file,
+                'video.mp4'
+              );
+            Storage::disk('local')->putFileAs(
+                '/public/videos/'.$video->id,
+                $preview,
+                'preview.png'
+              );
+              return redirect('/');
+
     }
 
     public function like($id, Request $request){

@@ -18,7 +18,7 @@
                         <div class="form-group row ">
                             <label for="title" class="col-sm-4 col-form-label text-md-right">{{ __('Video Preview') }}</label>
                             <div class="col-md-6">
-                                <input id="video" type="file" name="preview" class="form-control bg-dark" style="border:none;color:white;"  accept=".png, .jpg, .jpeg" required>
+                                <input id="video" type="file" name="preview" class="form-control bg-dark" style="border:none;color:white;"  accept=".png" required>
                             </div>
                             </div>
                         <div class="form-group row">

@@ -95,11 +95,11 @@
 
                             <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item bg-dark text-white " href="/lang/lv">
-                                    {{ __('lv') }}
+                                    {{ __('LV') }}
                                 </a>
 
                                 <a class="dropdown-item bg-dark text-white " href="/lang/en">
-                                    {{ __('en') }}
+                                    {{ __('EN') }}
                                 </a>
                             </div>
                         </li>
