@@ -83,12 +83,13 @@ class PlaylistController extends Controller
 
     public function delete($id){
         $user_id = auth()->user()->id;
+        $playlist = Playlist::where('id', $id)->first();
         if (Auth::guest()){
             $reg = '/register';
             return redirect($reg);
         }
         if (auth()->user()->type != 'admin'){
-            if ($user_id != $id){
+            if ($user_id != $playlist->users_id){
                 return "Access Denied!";
             }
         }

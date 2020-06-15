@@ -45,8 +45,8 @@ class VideoController extends Controller
         $comments = Comment::where('video_id', $id)->with('user')->orderBy('created_at', 'desc')->get();
         $video = Video::where('id', $id)->first();
         if ($video->type == '0'){
-            if (auth()->user()->type != 'admin') {
-                if ($video->users_id != $user ) {
+            if (auth()->user()->role != 'admin'){
+                if (auth()->user()->id != $video->users_id){
                     return "Access Denied!";
                 }
             }

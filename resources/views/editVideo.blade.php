@@ -31,7 +31,7 @@
                             <div class="col-md-6">
                                 <select class="custom-select"  id="type" name="type">
                                     <option value="1">{{ __('messages.Public') }}</option>
-                                    <option value="2">{{ __('messages.Private') }}</option>
+                                    <option value="0">{{ __('messages.Private') }}</option>
                                 </select>
                             </div>
                         </div>
