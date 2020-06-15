@@ -46,5 +46,7 @@ return [
     "Games" => "Spēles",
     "Funny" => "Smieklīgs",
     "Education" => "Izglītība",
-    "Music" => "Mūzika"
+    "Music" => "Mūzika",
+    "Edit" => "Rediģēt",
+    "Edit_Video" => "Rediģēt Video"
 ];

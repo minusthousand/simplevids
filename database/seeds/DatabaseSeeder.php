@@ -32,7 +32,6 @@ class DatabaseSeeder extends Seeder
         $video->category = 'Nature';
         $video->desc = 'Beautiful waves during the sunset.';
         $video->am_of_likes = '1';
-        $video->ltd_ratio = '0.5';
         $video->save();
         $video = new Video();
         $user = User::where('name', 'Mihails Tumasevics')->first();
@@ -42,7 +41,6 @@ class DatabaseSeeder extends Seeder
         $video->category = 'Nature';
         $video->desc = 'Beautiful waves during the sunset.';
         $video->am_of_likes = '3';
-        $video->ltd_ratio = '0.4';
         $video->save();
         $video = new Video();
         $user = User::where('name', 'Mihails Tumasevics')->first();
@@ -52,7 +50,6 @@ class DatabaseSeeder extends Seeder
         $video->category = 'Nature';
         $video->desc = 'Beautiful waves during the sunset.';
         $video->am_of_likes = '10';
-        $video->ltd_ratio = '1';
         $video->save();
 
         $comment = new Comment();

@@ -8,7 +8,10 @@
         <a href="/videos/{{$video->id}}/videoview" style="text-decoration:none; color: white;">
         <h2>{{$video->name}}</h2>
         </a>
-        <p>{{$video->desc}}</p>
+        <p style="white-space: nowrap;
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;">{{$video->desc}}</p>
         <br/>
         <h6>{{__("messages.Likes: ")}} {{$video->am_of_likes}}</h6>
     </div>

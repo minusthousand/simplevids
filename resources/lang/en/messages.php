@@ -46,5 +46,7 @@ return [
     "Games" => "Games",
     "Funny" => "Funny",
     "Education" => "Education",
-    "Music" => "Music"
+    "Music" => "Music",
+    "Edit" => "Edit",
+    "Edit_Video" => "Edit Video"
 ];

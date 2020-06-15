@@ -93,7 +93,7 @@ $(document).ready(function () {
 <div class="container" margin="200px">
     <div class="row">
         <video class="col" controls controlsList="nodownload">
-            <source src="/videos/{{$video->id}}/video" type="video/mp4">
+        <source src="{{url('videos')}}/{{$video->id}}/video" type="video/mp4">
           Your browser does not support the video tag.
           </video>
         </div>
@@ -113,6 +113,9 @@ $(document).ready(function () {
             <a class="dropdown-item bg-dark text-white " href="delete">
                 {{ __('messages.Delete') }}
             </a>
+            <a class="dropdown-item bg-dark text-white " href="edit">
+                {{ __('messages.Edit') }}
+            </a>
             @endif
             <a class="dropdown-item bg-dark text-white " href="report">
                 {{ __('messages.Report') }}
@@ -120,7 +123,7 @@ $(document).ready(function () {
         </div>
     </div>
             @endguest
-        <p>{{$video->desc}}</p>
+        <p style="white-space: pre-line;">{{$video->desc}}</p>
         <h6 id="likes">{{__("messages.Likes: ")}}{{$video->am_of_likes}}</h6>
         <button id="like" class="btn btn-light btn-sm">{{__("messages.Like")}}</button>
     </div>
@@ -145,9 +148,17 @@ $(document).ready(function () {
                                     <small class="text-muted">{{$comment->created_at}}</small>
                                 </span>
                                 <strong class="text-success">{{$comment->user->name}}</strong>
-                                <p>
+                                @guest
+                                @elseif ($comment->user_id == auth()->user()->id)
+                                <br>
+                                <span class="text-muted pull-right">
+                                    <a href="/video/{{$video->id}}/comment/{{$comment->id}}/delete" style="text-decoration: none"><small class="text-danger">{{__("messages.Delete")}}</small></a>
+                                </span>
+                                @endguest
+                                <span style="white-space: pre-line;">
                                 {{$comment->text}}
-                                </p>
+                                </span>
+                                <br>
                             </div>
                         </div>
                         @endforeach

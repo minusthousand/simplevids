@@ -22,7 +22,6 @@ class CreateVideosTable extends Migration
             $table->string('category', 50);
             $table->text('desc');
             $table->integer('am_of_likes');
-            $table->float('ltd_ratio');
         });
     }
 

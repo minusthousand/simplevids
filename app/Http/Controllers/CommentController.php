@@ -19,4 +19,9 @@ class CommentController extends Controller
         $comment->text = $request->content;
         $comment->save();
     }
+
+    public function delete($video_id, $id){
+        Comment::where('id', $id)->delete();
+        return redirect('/videos/'.$video_id.'/videoview');
+    }
 }

@@ -26,7 +26,19 @@ class PlaylistVideoController extends Controller
     }
 
     public function show($id){
+        if (Auth::guest()) {
+            $user = 'guest';
+        }
+        else {
+            $user = auth()->user()->id;
+        }
+        $playlist = Playlist::where('id', $id)->first();
         $playlistLinks = Playlist_Video::where('playlist_id', $id)->with('video')->get();
+        if ($playlist->type == '0'){
+            if ($playlist->users_id != $user) {
+                return "Access Denied!";
+            }
+        }
         return view('playlistView', ['videos' => $playlistLinks]);
     }
 

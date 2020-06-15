@@ -72,3 +72,9 @@ Route::post('/video/{id?}/getlikes', 'VideoController@getlikes');
 Route::get('/{id?}/likedvideos', 'PlaylistVideoController@likedVideos');
 
 Route::get('lang/{locale}','LanguageController');
+
+Route::get('video/{video_id?}/comment/{id?}/delete', 'CommentController@delete');
+
+Route::get('videos/{id?}/edit', 'VideoController@edit');
+
+Route::post('videos/{id?}/edit', 'VideoController@update');

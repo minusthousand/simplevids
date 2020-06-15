@@ -13,14 +13,14 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $videos = Video::orderBy('am_of_likes', 'desc')->get();
+        $videos = Video::where('type', '1')->orderBy('am_of_likes', 'desc')->get();
         return view('video', ['videos' => $videos]);
     }
 
     public function preview($id)
     {
-        $filePath = $id.'/preview.png';
-        return response()->file(storage_path('/app/public/videos'.DIRECTORY_SEPARATOR.($filePath)));
+        $filePath = $id.'\preview.png';
+        return response()->file(storage_path('\app\public\videos'.DIRECTORY_SEPARATOR.($filePath)));
     }
 
     public function videoView($id)
@@ -33,6 +33,11 @@ class VideoController extends Controller
         }
         $comments = Comment::where('video_id', $id)->with('user')->orderBy('created_at', 'desc')->get();
         $video = Video::where('id', $id)->first();
+        if ($video->type == '0'){
+        if ($video->users_id != $user) {
+            return "Access Denied!";
+        }
+    }
         return view('videoView', ['video' => $video, 'comments' => $comments, 'user' => $user] );
 }
 
@@ -80,7 +85,6 @@ class VideoController extends Controller
           $video->category = $request->category;
           $video->desc = $request->desc;
           $video->am_of_likes = '0';
-          $video->ltd_ratio = '0';
           $video->save();
             $video_file = $request->file('video');
             $preview = $request->file('preview');
@@ -115,7 +119,33 @@ class VideoController extends Controller
     }
 
     public function delete($id){
+        Storage::disk('local')->deleteDirectory('/public/videos/'.$id);
         Video::where('id', $id)->delete();
         return redirect('/home');
+    }
+
+    public function edit($id) {
+        if (Auth::guest()){
+            $reg = '/register';
+            return redirect($reg);
+        }
+        $video = Video::where('id', $id)->first();
+        return view('editVideo', ['video' => $video]);
+    }
+
+    public function update($id, Request $request) {
+        $user_id = auth()->user()->id;
+        $request->validate([
+            'name' => 'required:max:255',
+            'desc' => 'required'
+          ]);
+        $video = Video::where('id', $id)->first();
+          $video->name = $request->name;
+          $video->type = $request->type;
+          $video->category = $request->category;
+          $video->desc = $request->desc;
+          $video->save();
+
+          return redirect('/');
     }
 }
