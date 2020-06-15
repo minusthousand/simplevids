@@ -48,5 +48,8 @@ return [
     "Education" => "Izglītība",
     "Music" => "Mūzika",
     "Edit" => "Rediģēt",
-    "Edit_Video" => "Rediģēt Video"
+    "Edit_Video" => "Rediģēt Video",
+    "Videos" => "Visi Video",
+    "Playlists" => "Pleilisti",
+    "Reports" => "Ziņojumi"
 ];

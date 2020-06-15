@@ -109,7 +109,7 @@ $(document).ready(function () {
             <a class="dropdown-item bg-dark text-white " href="addtoplaylist">
                 {{ __('messages.Add_To_Playlist') }}
             </a>
-            @if (Auth::user()->id == $video->users_id)
+            @if (Auth::user()->id == $video->users_id || auth()->user()->role == 'admin')
             <a class="dropdown-item bg-dark text-white " href="delete">
                 {{ __('messages.Delete') }}
             </a>
@@ -149,7 +149,7 @@ $(document).ready(function () {
                                 </span>
                                 <strong class="text-success">{{$comment->user->name}}</strong>
                                 @guest
-                                @elseif ($comment->user_id == auth()->user()->id)
+                                @elseif (($comment->user_id == auth()->user()->id) || auth()->user()->role == 'admin')
                                 <br>
                                 <span class="text-muted pull-right">
                                     <a href="/video/{{$video->id}}/comment/{{$comment->id}}/delete" style="text-decoration: none"><small class="text-danger">{{__("messages.Delete")}}</small></a>

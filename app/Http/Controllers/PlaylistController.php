@@ -39,6 +39,17 @@ class PlaylistController extends Controller
         }
     }
 
+    public function showAll()
+    {
+        if (auth()->user()->role == 'admin') {
+            $playlists = Playlist::where('name', '!=', 'Liked Videos')->get();
+            return view('playlists', ['playlists' => $playlists]);
+        }
+        else {
+            return "Access Denied!";
+        }
+    }
+
     public function getId(Request $request){
         $user = Auth::user();
         $id = Playlist::where('users_id', $user->id)->where('name', $request->name)->first()->id;
@@ -71,6 +82,16 @@ class PlaylistController extends Controller
     }
 
     public function delete($id){
+        $user_id = auth()->user()->id;
+        if (Auth::guest()){
+            $reg = '/register';
+            return redirect($reg);
+        }
+        if (auth()->user()->type != 'admin'){
+            if ($user_id != $id){
+                return "Access Denied!";
+            }
+        }
         $user = auth()->user();
         if (Playlist::where('id', $id)->first()->name == "Liked Videos") {
             return 'Cannot delete liked videos playlist.';

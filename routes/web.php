@@ -78,3 +78,11 @@ Route::get('video/{video_id?}/comment/{id?}/delete', 'CommentController@delete')
 Route::get('videos/{id?}/edit', 'VideoController@edit');
 
 Route::post('videos/{id?}/edit', 'VideoController@update');
+
+Route::get('videosall', 'VideoController@showAll')->name('VideosAll');
+
+Route::get('playlistsall', 'PlaylistController@showAll')->name('PlaylistsAll');
+
+Route::get('reportsall', 'ReportController@showAll')->name('ReportsAll');
+
+Route::get('/report/{id?}/delete', 'ReportController@delete');

@@ -48,5 +48,8 @@ return [
     "Education" => "Education",
     "Music" => "Music",
     "Edit" => "Edit",
-    "Edit_Video" => "Edit Video"
+    "Edit_Video" => "Edit Video",
+    "Videos" => "Videos",
+    "Playlists" => "Playlists",
+    "Reports" => "Reports"
 ];

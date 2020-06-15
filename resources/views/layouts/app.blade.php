@@ -51,7 +51,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('messages.Register') }}</a>
                                 </li>
                             @endif
-                        @else
+                        @elseif (Auth::user()->role == 'user')
                         <li class="nav-item">
                             <a class="nav-link" href="/{{Auth::user()->id}}/likedvideos">{{ __('messages.Liked_Videos') }}</a>
                         </li>
@@ -69,6 +69,33 @@
                                     {{ __('messages.Upload') }}
                                 </a>
                             </div>
+                        </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item bg-dark text-white " href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('messages.Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @elseif (Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="/videosall">{{ __('messages.Videos') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/playlistsall">{{ __('messages.Playlists') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reportsall">{{ __('messages.Reports') }}</a>
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

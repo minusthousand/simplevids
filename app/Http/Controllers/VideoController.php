@@ -17,6 +17,17 @@ class VideoController extends Controller
         return view('video', ['videos' => $videos]);
     }
 
+    public function showAll()
+    {
+        if (auth()->user()->role == 'admin') {
+            $videos = Video::orderBy('am_of_likes', 'desc')->get();
+            return view('video', ['videos' => $videos]);
+        }
+        else {
+            return "Access Denied!";
+        }
+    }
+
     public function preview($id)
     {
         $filePath = $id.'\preview.png';
@@ -34,9 +45,11 @@ class VideoController extends Controller
         $comments = Comment::where('video_id', $id)->with('user')->orderBy('created_at', 'desc')->get();
         $video = Video::where('id', $id)->first();
         if ($video->type == '0'){
-        if ($video->users_id != $user) {
-            return "Access Denied!";
-        }
+            if (auth()->user()->type != 'admin') {
+                if ($video->users_id != $user ) {
+                    return "Access Denied!";
+                }
+            }
     }
         return view('videoView', ['video' => $video, 'comments' => $comments, 'user' => $user] );
 }
@@ -119,6 +132,17 @@ class VideoController extends Controller
     }
 
     public function delete($id){
+        $user_id = auth()->user()->id;
+        $video = Video::where('id', $id)->first();
+        if (Auth::guest()){
+            $reg = '/register';
+            return redirect($reg);
+        }
+        if (auth()->user()->type != 'admin'){
+            if ($user_id != $video->users_id){
+                return "Access Denied!";
+            }
+        }
         Storage::disk('local')->deleteDirectory('/public/videos/'.$id);
         Video::where('id', $id)->delete();
         return redirect('/home');
@@ -135,11 +159,16 @@ class VideoController extends Controller
 
     public function update($id, Request $request) {
         $user_id = auth()->user()->id;
+        $video = Video::where('id', $id)->first();
+        if (auth()->user()->type != 'admin'){
+            if ($user_id != $video->users_id){
+                return "Access Denied!";
+            }
+        }
         $request->validate([
             'name' => 'required:max:255',
             'desc' => 'required'
           ]);
-        $video = Video::where('id', $id)->first();
           $video->name = $request->name;
           $video->type = $request->type;
           $video->category = $request->category;

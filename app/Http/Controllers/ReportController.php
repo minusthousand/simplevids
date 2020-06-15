@@ -31,4 +31,20 @@ class ReportController extends Controller
 
         return redirect('/');
     }
+
+    public function showAll(){
+        if (auth()->user()->role != 'admin'){
+                return "Access Denied!";
+        }
+        $reports = Report::with('video')->get();
+        return view('reports', ['reports' => $reports]);
+    }
+
+    public function delete($id) {
+        if (auth()->user()->role != 'admin'){
+            return "Access Denied!";
+    }
+    Report::where('id', $id)->delete();
+    return redirect('/reportsall');
+    }
 }
