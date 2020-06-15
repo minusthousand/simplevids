@@ -14,6 +14,10 @@ return [
     "My_Videos" => "Mani Video",
     "View" => "Apskatīties",
     "Upload" => "Ielādēt",
+    "Video_Upload" => "Ielādēt Video",
+    "Video" => "Video",
+    "Video_Preview" => "Video Priekšskatījums",
+    "Description" => "Apraksts",
     "Logout" => "Izlogoties",
     "Create_Playlist" => "Izveidot Pleilistu",
     "Type" => "Tips",
@@ -36,5 +40,11 @@ return [
     "Options" => "Iespējas",
     "Comment_Section" => "Komentāru sadaļa",
     "Comment_Holder" => "rakstīt ziņu...",
-    "Post" => "Publicēt"
+    "Post" => "Publicēt",
+    "Category" => "Kategorija",
+    "Nature" => "Daba",
+    "Games" => "Spēles",
+    "Funny" => "Smieklīgs",
+    "Education" => "Izglītība",
+    "Music" => "Mūzika"
 ];

@@ -13,6 +13,10 @@ return [
     "My_Playlists" => "My Playlists",
     "My_Videos" => "My Videos",
     "View" => "View",
+    "Video_Upload" => "Video Upload",
+    "Video" => "Video",
+    "Video_Preview" => "Video Preview",
+    "Description" => "Description",
     "Upload" => "Upload",
     "Logout" => "Logout",
     "Create_Playlist" => "Create Playlist",
@@ -36,5 +40,11 @@ return [
     "Options" => "Options",
     "Comment_Section" => "Comment Section",
     "Comment_Holder" => "write a message...",
-    "Post" => "Post"
+    "Post" => "Post",
+    "Category" => "Category",
+    "Nature" => "Nature",
+    "Games" => "Games",
+    "Funny" => "Funny",
+    "Education" => "Education",
+    "Music" => "Music"
 ];
